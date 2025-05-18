@@ -1,0 +1,24 @@
+describe('Header and Footer Elements Tests', () => {
+  beforeEach(() => {
+    cy.visit('https://qauto.forstudy.space/');
+  });
+
+  it('should find all header buttons', () => {
+    // Припустимо, що кнопки в хедері мають клас "header-btn" або data-атрибут
+    cy.get('header').within(() => {
+      cy.get('button, a').each(($el) => {
+        cy.wrap($el).should('be.visible');
+      });
+    });
+  });
+
+  it('should find all footer buttons and links', () => {
+    // Футер - шукаємо всі кнопки і посилання
+    cy.get('footer').within(() => {
+      cy.get('button, a').each(($el) => {
+        cy.wrap($el).should('be.visible');
+        cy.wrap($el).should('have.attr', 'href').or('have.attr', 'type');
+      });
+    });
+  });
+});
